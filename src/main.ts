@@ -1,6 +1,8 @@
 // @ts-ignore isolatedModules
+import {createAnalyzerURL} from './urls/createAnalyzerURL'
 import { createLink } from './link'
 import {setStyle} from './setStyle'
+import {createWipefestURL} from './urls/createWipefestURL'
 
 const linkStyle = {
   display: 'flex',
@@ -21,8 +23,9 @@ function main() {
   	const code = matched[1]
     const fight = matched[2] || null
     const reportBar = document.querySelector('.report-bar-top-right-section')
-    const wowAnalyzerUrl = `https://www.wowanalyzer.com/report/${code}${fight ? `/${fight}` : ''}`
-    const wipefestUrl = `https://www.wipefest.gg/report/${code}${fight ? `/fight/${fight}` : ''}?gameVersion=warcraft-live`
+
+    const wowAnalyzerUrl = createAnalyzerURL(code, fight)
+    const wipefestUrl = createWipefestURL(code, fight)
     
     const parser = new DOMParser()
     const doc = parser.parseFromString(wowanalyzerLogo, 'image/svg+xml')
